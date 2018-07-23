@@ -15,16 +15,19 @@ class WebDriverManager {
 
     private var browserType: BrowserType
     private var baseUrl: String
-    private var driver: WebDriver? = null
+    var driver: WebDriver? = null
 
 
     init {
         browserType = configReader.getBrowserType()
         baseUrl = configReader.getUrl()
+        initDriver()
     }
 
     fun initDriver() {
         createDriver()
+        maxmizeWindow()
+        setImplicitWait()
     }
 
     fun createDriver() {
@@ -43,5 +46,9 @@ class WebDriverManager {
 
     fun setImplicitWait() {
         driver!!.manage().timeouts().implicitlyWait(configReader.getImplicitWaitValue(), TimeUnit.SECONDS)
+    }
+
+    fun driverQuit() {
+        driver!!.quit()
     }
 }
