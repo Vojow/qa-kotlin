@@ -3,12 +3,12 @@ package core
 import managers.PageObjectManager
 import managers.WebDriverManager
 
-class Context {
-    val driverManager = WebDriverManager()
-    val pages = PageObjectManager(driverManager.driver!!)
+object Context {
+    var driverManager: WebDriverManager = WebDriverManager()
+    var pages: PageObjectManager
 
     init {
-
+        pages = PageObjectManager(driverManager.driver)
     }
 
 }

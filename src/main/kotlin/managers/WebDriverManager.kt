@@ -11,16 +11,15 @@ import utils.ConfigReader
 import java.util.concurrent.TimeUnit
 
 class WebDriverManager {
-    var configReader = ConfigReader()
 
     private var browserType: BrowserType
     private var baseUrl: String
-    var driver: WebDriver? = null
+    lateinit var driver: WebDriver
 
 
     init {
-        browserType = configReader.getBrowserType()
-        baseUrl = configReader.getUrl()
+        browserType = ConfigReader.getBrowserType()
+        baseUrl = ConfigReader.getUrl()
         initDriver()
     }
 
@@ -41,14 +40,14 @@ class WebDriverManager {
     }
 
     fun maxmizeWindow() {
-        if (configReader.getMaximizeVaule()) driver!!.manage().window().maximize()
+        if (ConfigReader.getMaximizeVaule()) driver.manage().window().maximize()
     }
 
     fun setImplicitWait() {
-        driver!!.manage().timeouts().implicitlyWait(configReader.getImplicitWaitValue(), TimeUnit.SECONDS)
+        driver.manage().timeouts().implicitlyWait(ConfigReader.getImplicitWaitValue(), TimeUnit.SECONDS)
     }
 
     fun driverQuit() {
-        driver!!.quit()
+        driver.quit()
     }
 }

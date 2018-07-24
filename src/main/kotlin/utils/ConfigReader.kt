@@ -5,7 +5,7 @@ import java.io.BufferedReader
 import java.io.FileReader
 import java.util.*
 
-class ConfigReader {
+object ConfigReader {
 
     private var properties: Properties = Properties()
     private val propertiesFilePath: String = "configuration.properties"
