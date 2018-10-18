@@ -1,6 +1,7 @@
 package utils
 
 import enums.BrowserType
+import enums.ConfigVariables
 import java.io.BufferedReader
 import java.io.FileReader
 import java.util.*
@@ -8,7 +9,7 @@ import java.util.*
 object ConfigReader {
 
     private var properties: Properties = Properties()
-    private val propertiesFilePath: String = "configuration.properties"
+    private const val propertiesFilePath: String = "configuration.properties"
 
     init {
         val bufferedReader = BufferedReader(FileReader(propertiesFilePath))
@@ -16,7 +17,7 @@ object ConfigReader {
     }
 
     fun getBrowserType(): BrowserType {
-        return when (properties.getProperty("browser").toLowerCase()) {
+        return when (properties.getProperty(ConfigVariables.BROWSER.name).toLowerCase()) {
             "chrome" -> BrowserType.CHROME
             "firefox" -> BrowserType.FIREFOX
             "edge" -> BrowserType.EDGE
@@ -26,16 +27,16 @@ object ConfigReader {
         }
     }
 
-    fun getMaximizeVaule(): Boolean {
-        return properties.getProperty("maximize")!!.toBoolean()
+    fun getMaximizeValue(): Boolean {
+        return properties.getProperty(ConfigVariables.WINDOW_MAXIMIZE.name)!!.toBoolean()
     }
 
     fun getImplicitWaitValue(): Long {
-        return properties.getProperty("implicitWait").toLong()
+        return properties.getProperty(ConfigVariables.IMPLICIT_WAIT.name).toLong()
     }
 
     fun getUrl(): String {
-        return properties.getProperty("url")
+        return properties.getProperty(ConfigVariables.URL.name)
     }
 
 }
