@@ -12,24 +12,18 @@ import java.util.concurrent.TimeUnit
 
 class WebDriverManager {
 
-    private var browserType: BrowserType
-    private var baseUrl: String
+    private val browserType: BrowserType = ConfigReader.getBrowserType()
+    private val baseUrl: String = ConfigReader.getUrl()
     lateinit var driver: WebDriver
 
 
-    init {
-        browserType = ConfigReader.getBrowserType()
-        baseUrl = ConfigReader.getUrl()
-        initDriver()
-    }
-
     fun initDriver() {
         createDriver()
-        maxmizeWindow()
+        maximizeWindow()
         setImplicitWait()
     }
 
-    fun createDriver() {
+    private fun createDriver() {
         driver = when (browserType) {
             BrowserType.CHROME -> ChromeDriver()
             BrowserType.SAFARI -> SafariDriver()
@@ -39,11 +33,11 @@ class WebDriverManager {
         }
     }
 
-    fun maxmizeWindow() {
-        if (ConfigReader.getMaximizeVaule()) driver.manage().window().maximize()
+    private fun maximizeWindow() {
+        if (ConfigReader.getMaximizeValue()) driver.manage().window().maximize()
     }
 
-    fun setImplicitWait() {
+    private fun setImplicitWait() {
         driver.manage().timeouts().implicitlyWait(ConfigReader.getImplicitWaitValue(), TimeUnit.SECONDS)
     }
 
