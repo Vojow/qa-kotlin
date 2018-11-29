@@ -7,12 +7,12 @@ import cucumber.api.java.en.When
 class GoogleSteps {
 
     @When("I go to google homepage")
-    public fun goToGoogleHome() {
+    fun goToGoogleHome() {
         Context.pages.getHomePage().goToUrl()
     }
 
     @Then("I want to see search")
-    public fun isSearchDisplayed() {
+    fun isSearchDisplayed() {
         Context.pages.getHomePage().isSearchDisplayed()
     }
 }
