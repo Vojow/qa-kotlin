@@ -1,6 +1,7 @@
 package managers
 
 import enums.BrowserType
+import mu.KotlinLogging
 import org.openqa.selenium.WebDriver
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.edge.EdgeDriver
@@ -10,10 +11,12 @@ import org.openqa.selenium.safari.SafariDriver
 import utils.ConfigReader
 import java.util.concurrent.TimeUnit
 
+private val logger = KotlinLogging.logger {}
+
+
 class WebDriverManager {
 
     private val browserType: BrowserType = ConfigReader.getBrowserType()
-    private val baseUrl: String = ConfigReader.getUrl()
     lateinit var driver: WebDriver
 
 
@@ -31,6 +34,7 @@ class WebDriverManager {
             BrowserType.EDGE -> EdgeDriver()
             BrowserType.FIREFOX -> FirefoxDriver()
         }
+        logger.debug { "Create driver with type: $browserType" }
     }
 
     private fun maximizeWindow() {
@@ -43,5 +47,6 @@ class WebDriverManager {
 
     fun driverQuit() {
         driver.quit()
+        logger.debug { "Driver quit" }
     }
 }
