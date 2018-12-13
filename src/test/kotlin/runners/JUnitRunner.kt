@@ -6,4 +6,4 @@ import org.junit.runner.RunWith
 
 @RunWith(Cucumber::class)
 @CucumberOptions(features = ["src/test/resources/features"], glue = ["steps"], plugin = ["pretty"])
-class JunitRunner
+class JUnitRunner
